@@ -1,10 +1,10 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 
 from .choices import UserTypeChoice
 
 
-class Account(AbstractUser):
+class Account(AbstractBaseUser):
     email = models.EmailField(
         verbose_name='Электронная почта',
         unique=True,

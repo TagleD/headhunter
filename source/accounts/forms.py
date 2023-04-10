@@ -19,9 +19,8 @@ class CustomAccountCreationForm(forms.ModelForm):
             raise forms.ValidationError('Пароли не совпадают')
 
     def save(self, commit=True):
-        account = super().save(commit=False)
-        account.set_password(self.cleaned_data.get('password'))
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data.get('password'))
         if commit:
-            account.save()
-            get_user_model().objects.get_or_create(account=account)
-        return account
+            user.save()
+        return user
