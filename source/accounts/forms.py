@@ -2,10 +2,14 @@ from django import forms
 from django.contrib.auth import get_user_model
 
 
+class LoginForm(forms.Form):
+    email = forms.CharField(required=True, label='Электронная Почта', widget=forms.EmailInput)
+    password = forms.CharField(required=True, label='Пароль', widget=forms.PasswordInput)
+
+
 class CustomAccountCreationForm(forms.ModelForm):
     password = forms.CharField(label='Пароль', strip=False, required=True, widget=forms.PasswordInput)
     password_confirm = forms.CharField(label='Подтвердите пароль', strip=False, required=True, widget=forms.PasswordInput)
-
 
     class Meta:
         model = get_user_model()
