@@ -1,10 +1,10 @@
-from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 from .choices import UserTypeChoice
 
 
-class Account(AbstractBaseUser):
+class Account(AbstractUser):
     username = None
     first_name = None
     last_name = None
@@ -15,24 +15,28 @@ class Account(AbstractBaseUser):
         blank=False,
         null=False
     )
+
     user_type = models.CharField(
         verbose_name='Тип пользователя',
         choices=UserTypeChoice.choices,
         max_length=250,
         default=UserTypeChoice.APPLICANT
     )
+
     name = models.CharField(
         max_length=250,
         null=False,
         blank=False,
         verbose_name='Полное имя'
     )
+
     phone = models.CharField(
         max_length=11,
         null=False,
         blank=False,
         verbose_name='Телефон'
     )
+
     avatar = models.ImageField(
         null=True,
         blank=True,
@@ -42,4 +46,3 @@ class Account(AbstractBaseUser):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
-
