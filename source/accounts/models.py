@@ -5,6 +5,10 @@ from .choices import UserTypeChoice
 
 
 class Account(AbstractBaseUser):
+    username = None
+    first_name = None
+    last_name = None
+
     email = models.EmailField(
         verbose_name='Электронная почта',
         unique=True,
