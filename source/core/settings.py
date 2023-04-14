@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     # apps
     'accounts',
+    'applicants'
 ]
 
 MIDDLEWARE = [
@@ -89,7 +90,6 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
