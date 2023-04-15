@@ -1,0 +1,67 @@
+{% load django_bootstrap5 %}
+<!-- Модалка -->
+<div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <!-- Шапка -->
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Изменить профиль
+                </h1>
+
+                <!-- Иконка крестик (чтобы закрыть модалку) -->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Тело -->
+            <div class="modal-body">
+                <!-- Tabs -->
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <!-- Tab #login -->
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane"
+                                aria-selected="true">Изменить
+                        </button>
+                    </li>
+                    <!-- Tab #sign-up -->
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                                data-bs-target="#profile-tab-pane" type="button" role="tab"
+                                aria-controls="profile-tab-pane" aria-selected="false">Сменить пароль
+                        </button>
+                    </li>
+                </ul>
+
+                <!-- Forms -->
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active py-4" id="home-tab-pane" role="tabpanel"
+                         aria-labelledby="home-tab" tabindex="0">
+                        <!-- Какая-то форма (например аутентификация)-->
+                        <form action="{% url 'applicant_update' applicant_id %}" method="post"
+                              enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% bootstrap_form account_change_form %}
+                            <div class="d-grid gap-2">
+                                {% bootstrap_button button_type="submit" button_class='btn btn-primary green' content='Изменить' %}
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="tab-pane fade py-4" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
+                         tabindex="0">
+                        <!-- Какая-то форма (например регистрация)-->
+                        <form action="{% url 'applicant_change_password' applicant_id %}" method="post">
+                            {% csrf_token %}
+                            {% bootstrap_form change_password_form %}
+                            <div class="d-grid gap-2">
+                                {% bootstrap_button button_type="submit" button_class='btn btn-primary green' content='Изменить' %}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
