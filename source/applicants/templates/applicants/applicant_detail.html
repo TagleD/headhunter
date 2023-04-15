@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет соискателя {{ user_name }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+    {# Стили для пагинации #}
+    <style>
+        .pagination {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+
+        .pagination a, .pagination .page-disabled {
+            display: inline-block;
+            border: solid 1px #6a7ddd;
+            border-radius: 3px;
+            padding: 5px;
+            margin: 3px;
+        }
+
+
+        .pagination a {
+            color: white;
+            text-decoration: none;
+            background: #1b7a72;
+            border-color: #0c332f;
+        }
+
+
+        .pagination .page-disabled {
+            color: #dddddd;
+            background: #0c332f;
+            border-color: #0c332f;
+        }
+
+
+        .pagination .current-page {
+            display: inline-block;
+        }
+
+        .pagination a:hover {
+            background: #2ab7ac;
+            border-color: #0c332f;
+        }
+
+
+        .pagination .current-page input {
+            width: 50px;
+            padding: 5px 7px;
+            font-size: inherit;
+            border-radius: 5px;
+            text-align: center;
+            border: solid 1px gray;
+        }
+
+        .margin-pagination {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<section class="applicant-info" style="margin-top: 20px;">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-2">
+                {% if user_avatar %}
+                    <img src="{{ user_avatar.url }}" class="img-fluid">
+                {% else %}
+                    <img src="/user_pic/no_image.jpeg" class="img-fluid">
+                {% endif %}
+            </div>
+            <div class="col-4">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th scope="row">Имя</th>
+                        <td>{{ user_name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Email</th>
+                        <td>{{ user_email }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Телефон</th>
+                        <td colspan="">{{ user_phone }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><a href="">Редактировать</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="resume-list" style="margin-top: 50px">
+    <div class="container">
+        <div class="row">
+            {% if resume_list %}
+                {% for resume in resume_list %}
+                    <div class="col-3">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ resume.position }}</h5>
+                                <p class="card-text">{{ resume.full_name }}</p>
+                                <p class="card-text">Желаемая зарплата: {{ resume.salary }}</p>
+                                <a href="#" class="btn btn-primary">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h5>У вас еще нет резюме</h5>
+            {% endif %}
+        </div>
+        {% if is_paginated %}
+            {% include 'applicants/includes/pagination.html' %}
+        {% endif %}
+    </div>
+</section>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+</body>
+</html>
