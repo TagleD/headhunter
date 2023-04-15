@@ -43,11 +43,13 @@ class Resume(models.Model):
     facebook = models.CharField(
         max_length=512,
         null=True,
+        blank=True,
         verbose_name='Facebook profile URL'
     )
     linkedin = models.CharField(
         max_length=512,
         null=True,
+        blank=True,
         verbose_name='Linkedin profile URL'
     )
     is_published = models.BooleanField(

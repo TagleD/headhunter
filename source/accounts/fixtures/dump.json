@@ -1,0 +1,40 @@
+[
+{
+  "model": "accounts.account",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$390000$L9DZrywYCvbNrSJPOrIrim$YxtvCYJGloXfpmcxJy+asN0zwlkEJDj80btpQGwp6Lc=",
+    "last_login": "2023-04-15T08:07:42.674Z",
+    "is_superuser": true,
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-04-15T08:00:40.883Z",
+    "email": "tgv1410@mail.ru",
+    "user_type": "applicant",
+    "name": "",
+    "phone": "",
+    "avatar": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.account",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$390000$Hh7RDOEpCXe2XbkTplsWfX$nWxJOr1IkGvIGsg+yRRI5MOgz36UlqCJMqhMdVxVB/w=",
+    "last_login": "2023-04-15T08:07:16.822Z",
+    "is_superuser": false,
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-04-15T08:07:16.470Z",
+    "email": "andrei@andrei.com",
+    "user_type": "applicant",
+    "name": "Андрей",
+    "phone": "87011118334",
+    "avatar": "user_pic/HeadHunter_logo.png",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
