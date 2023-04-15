@@ -24,7 +24,6 @@ class Resume(models.Model):
         verbose_name='Должность'
     )
     salary = models.PositiveIntegerField(
-        max_length=8,
         null=False,
         blank=False,
         verbose_name='Желаемая зарплата'
@@ -66,3 +65,10 @@ class Resume(models.Model):
         verbose_name="Дата обновления",
         null=True
     )
+
+    def __str__(self):
+        return f'{self.full_name} - {self.position[:25]}'
+
+    class Meta:
+        verbose_name = 'Резюме'
+        verbose_name_plural = 'Резюме'

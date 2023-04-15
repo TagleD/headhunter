@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 from .choices import UserTypeChoice
+from .managers import AccountManager
 
 
 class Account(AbstractUser):
@@ -43,6 +44,8 @@ class Account(AbstractUser):
         upload_to='user_pic',
         verbose_name='Аватар'
     )
+
+    objects = AccountManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
