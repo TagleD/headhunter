@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
+    <title>{% block title %}Blog{% endblock %}</title>
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <ul class="menu">
+            <li>
+                <a href="{% url 'index' %}" class="btn btn-primary">Home</a>
+                {% block menu %}{% endblock %}
+
+            </li>
+            {% if user.is_authenticated %}
+
+                <li>
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-primary" value="Выйти">
+                    </form>
+                </li>
+                <li>Привет, {{ user.name }}</li>
+
+            {% else %}
+                <li><a href="{% url 'login' %}" class="btn btn-primary">Войти</a></li>
+                <li><a href="{% url 'register' %}" class="btn btn-primary">Зарегистрироваться</a></li>
+            {% endif %}
+
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>

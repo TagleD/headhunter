@@ -1,18 +1,90 @@
-{% load django_bootstrap5 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-{% bootstrap_messages %}
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" href="signup.css" />
+    <title>SignUp</title>
 </head>
 <body>
-    {% include 'accounts/includes/register_form.html' %}
+<h3>Регистрация нового пользователя</h3>
+
+
+<form action="/registr/" class="form" method="get" onsubmit="return ConfirmForm()">
+	<div>
+    	<b><span>Выберите роль пользователя:</span></b><br/>
+    	<input type="radio" name="user_type" class="chng" value="applicant" id="radio1" /> Соискатель
+    	<input type="radio" name="user_type" class="chng" value="company" id="radio2" /> Работодатель
+	</div><br/>
+    <div class="disp">
+		<b><span id="user-label">Ожидание выбора роли пользователя</span></b><br/>
+		<input type="text" name="name" required />
+    </div><br/>
+    <div class="disp">
+    	<b><span>Введите свой EMail</span></b><br/>
+        <input name="email" id="email" type="email" placeholder="EMail" required />
+        <span class="form__error">Это поле должно содержать E-Mail в формате example@site.com</span>
+    </div><br/>
+    <div class="disp">
+    	<b><span>Введите свой телефон</span></b><br/>
+        <input type="tel" name="phone" placeholder="Телефон" pattern="[\+]\d{1}[\(]\d{3}[\)]\d{3}[\-]\d{2}[\-]\d{2}" minlength="16" maxlength="16"/>
+        <span class="form__error">Это поле должно содержать телефон в формате +7(123)456-78-90 без пробелов</span>
+    </div><br/>
+    <div>
+    	<b><span>Введите свой пароль</span></b><br/>
+        <input name="password" id="password" type="password" placeholder="Пароль" required />
+    </div><br/>
+    <div>
+    	<b><span>Подтвердите свой пароль</span></b><br/>
+        <input name="confirm" id="confirm" class="chng" type="password" placeholder="Подтверждение пароля" required /><br/>
+        <span id="no-confirm" class="form__error">Ошибка!</span>
+    </div><br/>
+
+    <button type="submit">Отправить</button>
+</form>
+
+<script>
+
+let isConfirm = true;
+document.getElementById("radio1").checked = 1;
+document.getElementById("radio2").checked = 0;
+let blockUL = document.getElementById("user-label");
+blockUL.innerHTML = "Полное имя соискателя:";
+
+function ElementChange(event){
+	let elem = event.target;
+	if (elem.name == "user_type"){
+		ustyp=elem.value;
+		blockUL = document.getElementById("user-label");
+		blockUL.innerHTML = (ustyp == "applicant") ? "Полное имя соискателя:":"Наименование работодателя:";
+
+	} else {
+		let password = document.getElementById("password");
+        let err_conf = document.getElementById("no-confirm")
+		if (password.value != elem.value){
+            alert("Пароль и подтверждение не соответствуют!");
+            isConfirm = false;
+			err_conf.innerHTML = "Пароль и подтверждение не соответствуют!";
+		} else {
+            isConfirm = true;
+			err_conf.innerHTML = "";
+		}
+
+	}
+}
+
+window.onload = function() {
+    const changes = document.getElementsByClassName('chng');
+    for (chng of changes) {
+        chng.addEventListener('change', ElementChange);
+    }
+}
+
+function ConfirmForm(){
+    return isConfirm;
+}
+
+
+</script>
 </body>
 </html>
 
