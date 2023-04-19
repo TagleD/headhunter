@@ -1,8 +1,22 @@
+from django.http import Http404
+from django.shortcuts import get_object_or_404
 from django.urls import reverse
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 
 from applicants.forms import ResumeForm
 from applicants.models import Resume
+
+
+class ResumeDetailView(DetailView):
+    template_name = 'resumes/resume_detail.html'
+    model = Resume
+
+    def get(self, request, *args, **kwargs):
+        context = super().get(request, *args, **kwargs)
+        resume = get_object_or_404(Resume, pk=kwargs['pk'])
+        if resume.is_deleted == True:
+            raise Http404
+        return context
 
 
 class ResumeCreateView(CreateView):
