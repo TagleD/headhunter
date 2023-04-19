@@ -1,7 +1,7 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, UpdateView
 
 from applicants.forms import ResumeForm
 from applicants.models import Resume
@@ -32,3 +32,12 @@ class ResumeCreateView(CreateView):
         resume.applicant = self.request.user
         resume.save()
         return super().form_valid(form)
+
+
+class ResumeUpdateView(UpdateView):
+    template_name = 'resumes/resume_update.html'
+    model = Resume
+    form_class = ResumeForm
+
+    def get_success_url(self):
+        return reverse('applicant_detail', kwargs={'pk': self.request.user.pk})
