@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils import timezone
 
 
 class Resume(models.Model):
@@ -52,6 +53,11 @@ class Resume(models.Model):
         blank=True,
         verbose_name='Linkedin profile URL'
     )
+    is_deleted = models.BooleanField(
+        verbose_name='Удалено',
+        null=False,
+        default=False
+    )
     is_published = models.BooleanField(
         null=False,
         blank=False,
@@ -70,6 +76,11 @@ class Resume(models.Model):
 
     def __str__(self):
         return f'{self.full_name} - {self.position[:25]}'
+
+    def delete(self, using=None, keep_parents=False):
+        self.is_deleted = True
+        self.deleted_at = timezone.now()
+        self.save()
 
     class Meta:
         verbose_name = 'Резюме'

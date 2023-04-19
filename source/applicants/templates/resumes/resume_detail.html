@@ -14,10 +14,13 @@
 <body>
 
 
-    <p>{{ resume.about }}</p>
-    <p>{{ resume.created_at }}</p>
-    <p>{{ resume.salary }}</p>
+<p>{{ resume.about }}</p>
+<p>{{ resume.created_at }}</p>
+<p>{{ resume.salary }}</p>
 
-
+<form action="{% url 'resume_delete' resume.pk %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class='btn btn-danger'>Удалить</button>
+</form>
 </body>
 </html>
