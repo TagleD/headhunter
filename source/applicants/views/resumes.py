@@ -1,6 +1,7 @@
 from django.http import Http404
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
+from django.utils import timezone
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
 from applicants.forms import ResumeForm
@@ -48,3 +49,10 @@ class ResumeDeleteView(DeleteView):
 
     def get_success_url(self):
         return reverse('applicant_detail', kwargs={'pk': self.request.user.pk})
+
+
+def resume_update_data(request, pk):
+    resume = get_object_or_404(Resume, pk=pk)
+    resume.updated_at = timezone.now()
+    resume.save()
+    return redirect('resume_detail', resume.pk)
