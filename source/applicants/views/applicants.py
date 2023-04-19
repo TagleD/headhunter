@@ -18,7 +18,7 @@ class ApplicantDetailView(ListView):
 
     def get_queryset(self):
         applicant_id = self.kwargs.get('pk')
-        return Resume.objects.filter(applicant_id=applicant_id)
+        return Resume.objects.filter(applicant_id=applicant_id).exclude(is_deleted=True)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
