@@ -62,6 +62,10 @@ class Vacancy(models.Model):
         verbose_name='Статус публикации'
     )
 
+    is_deleted = models.BooleanField(
+        default=False,
+    )
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -72,12 +76,14 @@ class Vacancy(models.Model):
         blank=False,
         verbose_name='Nickname telegram'
     )
+
     facebook = models.CharField(
         max_length=512,
         null=True,
         blank=True,
         verbose_name='Facebook profile URL'
     )
+
     linkedin = models.CharField(
         max_length=512,
         null=True,
