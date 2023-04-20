@@ -94,11 +94,16 @@
                         <td colspan="">{{ applicant_phone }}</td>
                     </tr>
                     <tr>
-                        <td colspan="2">
+                        <td colspan="1">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">
                                 Редактировать
                             </button>
+                        </td>
+                        <td colspan="2">
+                            <a href="{% url 'resume_create' %}" class="btn btn-primary">
+                                Создать резюме
+                            </a>
                         </td>
                     </tr>
                     </tbody>
@@ -119,7 +124,11 @@
                                 <h5 class="card-title">{{ resume.position }}</h5>
                                 <p class="card-text">{{ resume.full_name }}</p>
                                 <p class="card-text">Желаемая зарплата: {{ resume.salary }}</p>
-                                <a href="#" class="btn btn-primary">Подробнее</a>
+                                <a href="{% url 'resume_detail' resume.pk %}" class="btn btn-primary">Подробнее</a>
+                                <a href="{% url 'resume_update' resume.pk %}" class="btn btn-primary"
+                                   style="margin-top: 20px">Редактировать</a>
+                                <a href="{% url 'resume_update_data' resume.pk %}" class="btn btn-primary"
+                                   style="margin-top: 20px">Обновить</a>
                             </div>
                         </div>
                     </div>

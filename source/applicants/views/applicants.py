@@ -1,5 +1,4 @@
 from django.shortcuts import redirect, get_object_or_404
-from django.urls import reverse
 from django.views.generic import ListView, FormView
 
 from accounts.forms import AccountChangePasswordForm, AccountUpdateForm
@@ -19,7 +18,7 @@ class ApplicantDetailView(ListView):
 
     def get_queryset(self):
         applicant_id = self.kwargs.get('pk')
-        return Resume.objects.filter(applicant_id=applicant_id)
+        return Resume.objects.filter(applicant_id=applicant_id).exclude(is_deleted=True)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -43,7 +42,7 @@ class ApplicantUpdateView(FormView):
         print(form)
         if form.is_valid():
             form.save()
-        return reverse('applicant_detail', kwargs={'pk': applicant.pk})
+        return redirect('applicant_detail', pk=applicant.pk)
 
 
 class ApplicantChangePasswordView(FormView):
