@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     # apps
     'accounts',
+    'main',
 ]
 
 MIDDLEWARE = [
@@ -82,7 +83,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'headhunter',
+        'NAME': 'headhunter2004',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': 'localhost',

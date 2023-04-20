@@ -40,6 +40,7 @@ class LogoutView(View):
         return redirect('login')
 
 
+
 class RegisterAccountView(CreateView):
     template_name = 'accounts/registration.html'
     form_class = CustomAccountCreationForm

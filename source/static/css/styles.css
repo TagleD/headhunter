@@ -1,0 +1,40 @@
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+.blk-line{
+    width: 100%;
+    height: 56px;
+    background: black;
+}
+.navbar {
+    background: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.menu > a {
+    color: white;
+    padding: 0 7px;
+    border-right: 1px solid black;
+    text-decoration: none;
+}
+.menu > span {
+    color: white;
+}
+.menu-item:nth-last-element{
+    border-right: none;
+}
+.hh-menu{
+    color: white;
+    text-decoration: none;
+}
+.logo-title {
+    padding: 5px 15px;
+    text-decoration: none;
+}
+
+.content-block {
+    margin-top: 40px;
+}
+
