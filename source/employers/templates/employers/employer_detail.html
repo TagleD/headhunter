@@ -35,15 +35,34 @@
             <div class="col-12 col-lg-8">
                 <div class="row g-4">
                     <div class="col-12 d-flex justify-content-end">
-                        <a href="#" class="btn btn-success">Add Vacancy</a>
-                    </div>
-                    <div class="col-12">
-                        {% for vacancy in vacancies %}
-                            {% include 'employers/includes/card.html' %}
-                        {% endfor %}
+                        <a href="{% url 'vacancy_create' %}" class="btn btn-success">Add Vacancy</a>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row">
+            {% if vacancies %}
+                {% for vacancy in vacancies %}
+                    <div class="col-4">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ vacancy.name }}</h5>
+                                <p class="card-text">{{ vacancy.category }}</p>
+                                <p class="card-text">Зарплата от {{ vacancy.salary_start }}</p>
+                                <a href="{% url 'vacancy_detail' vacancy.pk %}" class="btn btn-primary">Подробнее</a>
+                                <a href="{% url 'vacancy_update' vacancy.pk %}" class="btn btn-primary"
+                                   style="margin-top: 20px">Редактировать</a>
+                                <a href="{% url 'vacancy_update_data' vacancy.pk %}"
+                                   class="btn btn-primary"
+                                   style="margin-top: 20px">Обновить
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h5>У вас еще нет вакансий</h5>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

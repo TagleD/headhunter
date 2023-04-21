@@ -3,23 +3,23 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.utils import timezone
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
+from employers.forms import VacancyForm
+from employers.models import Vacancy
 
-from ..forms import VacancyForm
-from ..models import Vacancy
 
-
-class ResumeDetailView(DetailView):
+class VacancyDetailView(DetailView):
     template_name = 'employers/vacancies/vacancy_detail.html'
     model = Vacancy
 
     def get(self, request, *args, **kwargs):
         context = super().get(request, *args, **kwargs)
         vacancy = get_object_or_404(Vacancy, pk=kwargs['pk'])
-        context['vacancy'] = vacancy
+        if vacancy.is_deleted == True:
+            raise Http404
         return context
 
 
-class ResumeCreateView(CreateView):
+class VacancyCreateView(CreateView):
     template_name = 'employers/vacancies/vacancy_create.html'
     model = Vacancy
     form_class = VacancyForm
@@ -34,24 +34,24 @@ class ResumeCreateView(CreateView):
         return super().form_valid(form)
 
 
-class ResumeUpdateView(UpdateView):
+class VacancyUpdateView(UpdateView):
     template_name = 'employers/vacancies/vacancy_update.html'
     model = Vacancy
     form_class = VacancyForm
 
     def get_success_url(self):
-        return reverse('applicant_detail', kwargs={'pk': self.request.user.pk})
+        return reverse('employer_detail', kwargs={'pk': self.request.user.pk})
 
 
-class ResumeDeleteView(DeleteView):
+class VacancyDeleteView(DeleteView):
     model = Vacancy
 
     def get_success_url(self):
-        return reverse('applicant_detail', kwargs={'pk': self.request.user.pk})
+        return reverse('employer_detail', kwargs={'pk': self.request.user.pk})
 
 
-def resume_update_data(request, pk):
-    resume = get_object_or_404(Vacancy, pk=pk)
-    resume.updated_at = timezone.now()
-    resume.save()
-    return redirect('vacancy_detail', resume.pk)
+def vacancy_update_data(request, pk):
+    vacancy = get_object_or_404(Vacancy, pk=pk)
+    vacancy.updated_at = timezone.now()
+    vacancy.save()
+    return redirect('vacancy_detail', vacancy.pk)

@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}Просмотр вакансии{% endblock %}
+
+{% block content %}
+    <h2>Вакансия</h2>
+    <p>Название: {{ vacancy.name }}</p>
+    <p>Категория: {{ vacancy.category }}</p>
+    <p>Зарплата от:{{ vacancy.salary_start }}</p>
+    <p>Зарплата до: {{ vacancy.salary_end }}</p>
+    <p>О вокансии: {{ vacancy.about }}</p>
+    <p>Требуется: {{ vacancy.requirements }}</p>
+
+    <form action="{% url 'vacancy_delete' vacancy.pk %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class='btn btn-danger'>Удалить</button>
+    </form>
+{% endblock %}
+
+
