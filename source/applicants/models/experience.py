@@ -27,7 +27,6 @@ class Experience(models.Model):
         verbose_name='Занимаемая должность',
     )
     started_at = models.DateTimeField(
-        auto_now_add=True,
         verbose_name="Дата начала"
     )
     ended_at = models.DateTimeField(

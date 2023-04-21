@@ -1,10 +1,10 @@
 from django.http import Http404
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
-from applicants.forms import ResumeForm
+from applicants.forms import ResumeForm, experience_form_set
 from applicants.models import Resume
 
 
@@ -20,6 +20,20 @@ class ResumeDetailView(DetailView):
         return context
 
 
+# class ResumeCreateView(CreateView):
+#     template_name = 'resumes/resume_create.html'
+#     model = Resume
+#     form_class = ResumeForm
+#
+#     def get_success_url(self):
+#         return reverse('applicant_detail', kwargs={'pk': self.request.user.pk})
+#
+#     def form_valid(self, form):
+#         resume = form.save(commit=False)
+#         resume.applicant = self.request.user
+#         resume.save()
+#         return super().form_valid(form)
+
 class ResumeCreateView(CreateView):
     template_name = 'resumes/resume_create.html'
     model = Resume
@@ -28,11 +42,26 @@ class ResumeCreateView(CreateView):
     def get_success_url(self):
         return reverse('applicant_detail', kwargs={'pk': self.request.user.pk})
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.POST:
+            context['experience_form_set'] = experience_form_set(self.request.POST)
+        else:
+            context['experience_form_set'] = experience_form_set()
+        return context
+
     def form_valid(self, form):
-        resume = form.save(commit=False)
-        resume.applicant = self.request.user
-        resume.save()
-        return super().form_valid(form)
+        context = self.get_context_data()
+        experience_form_set = context['experience_form_set']
+        if experience_form_set.is_valid():
+            resume = form.save(commit=False)
+            resume.applicant = self.request.user
+            resume.save()
+            experience_form_set.instance = resume
+            experience_form_set.save()
+            return redirect(self.get_success_url())
+        else:
+            render(self.request, self.template_name, context=self.get_context_data(form=form))
 
 
 class ResumeUpdateView(UpdateView):
