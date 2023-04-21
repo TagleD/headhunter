@@ -7,9 +7,11 @@
 
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
     <title>{% block title %}Home page{% endblock %}</title>
+
 </head>
 <body>
 <div class="blk-line">
@@ -18,9 +20,9 @@
             <a class="logo-title" href="/"><img src="/static/images/HH_logo.png" width="30" height="auto"></a>
 
             <div class="menu">
-                <div class="hh-menu">
+
                     {% block menu %}{% endblock %}
-                </div>
+
                 <a class="menu-item" href="{% url 'index' %}">Home</a>
 
 

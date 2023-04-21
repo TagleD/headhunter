@@ -1,26 +1,24 @@
+{% extends 'base.html' %}
 {% load django_bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 {% bootstrap_messages %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Resume detail</title>
-</head>
-<body>
+
+{% block title %}Resume detail{% endblock %}
+{% block content %}
+
+<p> <b> Полное имя: </b> {{ resume.full_name }}</p>
+<p> <b> Предполагаемая должность: </b> {{ resume.position }}</p>
+<p> <b> Ожидаемая зарплата: </b> {{ resume.salary }}</p>
+<p> <b> О себе: </b> {{ resume.about }}</p>
+<p> <b> Telegram: </b> {{ resume.telegram }}</p>
+<p> <b> Facebook: </b> {{ resume.facebook }}</p>
+<p> <b> Linkedin: </b> {{ resume.linkedin }}</p>
+<p> <b> Дата создания: </b> {{ resume.created_at }}</p>
 
 
-<p>{{ resume.about }}</p>
-<p>{{ resume.created_at }}</p>
-<p>{{ resume.salary }}</p>
-
-<form action="{% url 'resume_delete' resume.pk %}" method="post">
-    {% csrf_token %}
-    <button type="submit" class='btn btn-danger'>Удалить</button>
-</form>
-</body>
-</html>
+{% if user.id == resume.applicant.id %}
+<a href="{% url 'resume_delete' resume.pk %}" class="btn btn-danger">Удалить</a>
+<a href="{% url 'resume_update' resume.pk %}" class="btn btn-primary">Редактировать</a>
+{% endif %}
+{% endblock %}
