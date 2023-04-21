@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Employer
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 col-lg-4">
+                {% if employer_avatar %}
+                    <img src="{{ employer_avatar.url }}" class="img-fluid rounded" alt="{{ employer_name }}">
+                {% else %}
+                    <img src="/uploads/user_pic/no_image.jpeg" class="img-fluid rounded" alt="{{ employer_name }}">
+                {% endif %}
+            </div>
+            <div class="col-12 col-lg-8">
+                <div class="name">{{ employer_name }}</div>
+                <div class="phone">{{ employer_phone }}</div>
+                <div class="email">{{ employer_email }}</div>
+
+                {#        Modal        #}
+                <button type="button" class="btn btn-primary mt-5" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                    Редактировать
+                </button>
+                {% include 'employers/includes/modal.html' %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-lg-4">
+                Filters
+            </div>
+            <div class="col-12 col-lg-8">
+                <div class="row g-4">
+                    <div class="col-12 d-flex justify-content-end">
+                        <a href="#" class="btn btn-success">Add Vacancy</a>
+                    </div>
+                    <div class="col-12">
+                        {% for vacancy in vacancies %}
+                            {% include 'employers/includes/card.html' %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

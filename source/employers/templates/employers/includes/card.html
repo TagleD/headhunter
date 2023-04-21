@@ -1,0 +1,24 @@
+<div class="card">
+    <div class="card-body">
+        <div class="top mb-4 d-flex justify-content-between">
+            <div class="left">
+                By: {{ user.email }}
+            </div>
+            <div class="right">
+                Posted at: {{ vacancy.created_at }}
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="left">
+                <span class="text-primary fw-bold">{{ vacancy.name }}</span>
+                <span class="ms-2 text-muted">{{ vacancy.category }}</span>
+                <span class="ms-2">
+                    {{ vacancy.salary_start }} руб.
+                    {% if vacancy.salary_end %}
+                        - {{ vacancy.salary_end }} руб.
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
