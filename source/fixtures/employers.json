@@ -1,0 +1,42 @@
+[
+{
+  "model": "employers.vacancy",
+  "pk": 1,
+  "fields": {
+    "employer": 3,
+    "name": "Игрок в CSGO",
+    "category": "cybersport",
+    "salary_start": 1000000,
+    "salary_end": 3000000,
+    "about": "Нужен хороший игрок",
+    "requirements": "10000 часов",
+    "is_published": true,
+    "is_deleted": false,
+    "created_at": "2023-04-22T04:02:20.679Z",
+    "updated_at": "2023-04-22T04:02:32.476Z",
+    "telegram": "@oleg",
+    "facebook": null,
+    "linkedin": null
+  }
+},
+{
+  "model": "employers.vacancy",
+  "pk": 3,
+  "fields": {
+    "employer": 3,
+    "name": "Посудомойщик",
+    "category": "restaurant business",
+    "salary_start": 150000,
+    "salary_end": 165000,
+    "about": "Посудомойщик",
+    "requirements": "Посудомойщик",
+    "is_published": true,
+    "is_deleted": false,
+    "created_at": "2023-04-22T04:04:01.764Z",
+    "updated_at": "2023-04-22T04:04:01.766Z",
+    "telegram": "@oleg",
+    "facebook": null,
+    "linkedin": null
+  }
+}
+]

@@ -1,0 +1,56 @@
+[
+{
+  "model": "applicants.resume",
+  "pk": 1,
+  "fields": {
+    "applicant": 2,
+    "full_name": "Иванов Иван Иванович",
+    "position": "Python developer",
+    "salary": 2000000,
+    "about": "Программист",
+    "telegram": "@ivan",
+    "facebook": null,
+    "linkedin": null,
+    "is_deleted": false,
+    "is_published": true,
+    "created_at": "2023-04-22T03:55:50.141Z",
+    "updated_at": "2023-04-22T03:55:58.758Z"
+  }
+},
+{
+  "model": "applicants.resume",
+  "pk": 2,
+  "fields": {
+    "applicant": 2,
+    "full_name": "Иван Иванов",
+    "position": "Java разработчик",
+    "salary": 400000,
+    "about": "программист",
+    "telegram": "@ivan",
+    "facebook": null,
+    "linkedin": null,
+    "is_deleted": false,
+    "is_published": true,
+    "created_at": "2023-04-22T03:56:44.234Z",
+    "updated_at": "2023-04-22T03:57:00.118Z"
+  }
+},
+{
+  "model": "applicants.resume",
+  "pk": 3,
+  "fields": {
+    "applicant": 4,
+    "full_name": "Руслан Олегович",
+    "position": "Бухгалтер",
+    "salary": 3000000,
+    "about": "Бухгалтер",
+    "telegram": "@ruslan",
+    "facebook": null,
+    "linkedin": null,
+    "is_deleted": false,
+    "is_published": true,
+    "created_at": "2023-04-22T04:05:11.274Z",
+    "updated_at": "2023-04-22T04:05:11.277Z"
+  }
+}
+]
